@@ -1,0 +1,401 @@
+/* Container & Base Reset */
+.zedx-s1-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+/* Zigzag Grid Row Layout */
+.zedx-s1-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+/* Section Text Styling */
+.zedx-s1-section-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ef4444;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.zedx-s1-heading {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.zedx-s1-red {
+  color: #dc2626;
+}
+
+.zedx-s1-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 28px;
+}
+
+/* Checkmark Feature List (Section 1A) */
+.zedx-s1-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.zedx-s1-feature-list li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.zedx-s1-check {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #ef4444;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.zedx-s1-feature-list strong {
+  display: block;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.zedx-s1-feature-list p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Pillar Cards Grid (Section 1B) */
+.zedx-s1-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.zedx-s1-pillar-card {
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.zedx-s1-pillar-icon {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.zedx-s1-pillar-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.zedx-s1-pillar-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Graphic UI Cards (Section 1A) */
+.zedx-s1-graphic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zedx-s1-card-ui {
+  width: 100%;
+  max-width: 460px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.zedx-s1-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.zedx-s1-pill-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #22c55e;
+  background-color: rgba(34, 197, 94, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.zedx-s1-dot-active {
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+}
+
+.zedx-s1-badge-network {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: #1e293b;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.zedx-s1-key-box {
+  background-color: #1e293b;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.zedx-s1-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.zedx-s1-key-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zedx-s1-key-display code {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.zedx-s1-copy-btn {
+  background-color: #dc2626;
+  color: #ffffff;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.zedx-s1-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.zedx-s1-stat-item {
+  background-color: #1a2332;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.zedx-s1-stat-title {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.zedx-s1-stat-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.zedx-s1-stat-value.text-red {
+  color: #ef4444;
+}
+
+.zedx-s1-card-footer {
+  border-top: 1px solid #1e293b;
+  padding-top: 14px;
+}
+
+.zedx-s1-footer-text {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  display: block;
+}
+
+/* Terminal & Execution Graphic (Section 1B) */
+.zedx-s1-preview-terminal {
+  width: 100%;
+  max-width: 460px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.zedx-s1-terminal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 12px;
+}
+
+.zedx-s1-terminal-ping {
+  color: #22c55e;
+  font-size: 0.7rem;
+}
+
+.zedx-s1-route-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1e293b;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.zedx-s1-route-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zedx-s1-step-label {
+  font-size: 0.65rem;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.zedx-s1-step-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.zedx-s1-route-step.highlight .zedx-s1-step-value {
+  color: #ef4444;
+}
+
+.zedx-s1-route-arrow {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.zedx-s1-metrics-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  margin-bottom: 20px;
+  background: #1a2332;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.zedx-s1-metric-label {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.zedx-s1-metric-val {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.zedx-s1-metric-val.text-green {
+  color: #22c55e;
+}
+
+.zedx-s1-action-btn {
+  width: 100%;
+  background-color: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.zedx-s1-action-btn:hover {
+  background-color: #b91c1c;
+}
+
+/* -------------------------------------------------------------
+   MOBILE RESPONSIVENESS & ZIGZAG STACKING
+   ------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .zedx-s1-wrapper {
+    gap: 60px;
+    padding: 40px 16px;
+  }
+
+  .zedx-s1-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* On Mobile: Ensure Graphic is always below Text for natural reading */
+  .zedx-s1-zigzag-left .zedx-s1-graphic-container {
+    order: 2;
+  }
+
+  .zedx-s1-zigzag-left .zedx-s1-text-container {
+    order: 1;
+  }
+
+  .zedx-s1-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .zedx-s1-heading {
+    font-size: 1.75rem;
+  }
+}

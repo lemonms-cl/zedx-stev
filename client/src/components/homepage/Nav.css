@@ -1,0 +1,167 @@
+/* Navigation Bar Container */
+.zedx-nav-container {
+  width: 100%;
+  background-color: #090d16;
+  border-bottom: 1px solid #1e293b;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+.zedx-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 80px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 1. Left Logo Zone (Strictly 300px allocated width) */
+.zedx-nav-logo-zone {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.zedx-nav-logo-link {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zedx-nav-red {
+  color: #dc2626;
+}
+
+.zedx-nav-logo-sub {
+  font-size: 0.7rem;
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 2. Navigation Links (Larger & Lighter) */
+.zedx-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
+}
+
+.zedx-nav-link-item {
+  color: #cbd5e1; /* Lighter, more prominent text */
+  text-decoration: none;
+  font-size: 1.05rem; /* Larger font size */
+  font-weight: 600;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.zedx-nav-link-item:hover {
+  color: #ffffff;
+}
+
+/* 3. CTA Sign In Button (Plain, Rectangular 0px Edge) */
+.zedx-nav-cta-container {
+  width: 180px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.zedx-nav-signin-btn {
+  background-color: #dc2626;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 0px; /* Sharp 0 edge rectangle */
+  border: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.zedx-nav-signin-btn:hover {
+  background-color: #b91c1c;
+}
+
+/* Mobile Toggle */
+.zedx-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile Drawer Menu */
+.zedx-mobile-drawer {
+  display: none;
+  flex-direction: column;
+  background-color: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  padding: 20px;
+  gap: 16px;
+}
+
+.zedx-mobile-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 8px 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.zedx-mobile-link:hover {
+  color: #ffffff;
+}
+
+.zedx-mobile-signin-btn {
+  background-color: #dc2626;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px;
+  border-radius: 0px; /* Sharp 0 edge rectangle */
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .zedx-nav-links {
+    display: none;
+  }
+
+  .zedx-nav-cta-container {
+    display: none;
+  }
+
+  .zedx-mobile-toggle {
+    display: block;
+  }
+
+  .zedx-mobile-drawer {
+    display: flex;
+  }
+
+  .zedx-nav-logo-zone {
+    width: auto;
+  }
+}

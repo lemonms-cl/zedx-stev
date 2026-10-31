@@ -1,69 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root { color-scheme: dark; }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: "DM Sans", system-ui, sans-serif;
-    color: rgba(255,255,255,0.92);
-    background:
-      radial-gradient(ellipse 100% 70% at 50% 0%, rgba(0,217,192,0.06), transparent 50%),
-      radial-gradient(ellipse 130% 95% at 50% 42%, #0b1217 0%, #050a0f 52%, #020508 100%);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; }
-  input, button { font-family: inherit; }
-
-  ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 9px; }
-}
-
-@layer utilities {
-  .spinner {
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 50%;
-    border: 2px solid rgba(45,212,163,0.3);
-    border-top-color: #5ee9b5;
-    animation: spin 0.8s linear infinite;
-  }
-
-  .ticker-track {
-    animation: ticker-marquee 36s linear infinite;
-  }
-  .ticker-track:hover {
-    animation-play-state: paused;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ticker-track { animation: none; }
-  }
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-@keyframes ticker-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes floatY {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes dotPulse {
-  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-  40% { opacity: 1; transform: scale(1.2); }
+/* ==========================
+   RESPONSIVE FLEX
+========================== */
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
