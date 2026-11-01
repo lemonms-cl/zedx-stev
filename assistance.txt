@@ -1,0 +1,10 @@
+-------------install vercel
+
+npm install -g vercel
+
+
+-----contracts tests
+
+cd contracts
+npx hardhat test
+npx hardhat test --config hardhat.config.cjs
