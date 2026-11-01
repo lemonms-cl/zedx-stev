@@ -3,6 +3,8 @@
 import { createContext, useContext, type ReactNode } from "react";
 import type { ApiConfig } from "@/types";
 
+const fallbackConfig: ApiConfig = {} as ApiConfig;
+
 const Ctx = createContext<ApiConfig | null>(null);
 
 export function ConfigProvider({ value, children }: { value: ApiConfig; children: ReactNode }) {
@@ -11,6 +13,11 @@ export function ConfigProvider({ value, children }: { value: ApiConfig; children
 
 export function useConfig() {
   const v = useContext(Ctx);
-  if (!v) throw new Error("ConfigProvider missing");
+  
+  // Return the fallback configuration if the provider is missing during static export/prerendering
+  if (!v) {
+    return fallbackConfig;
+  }
+  
   return v;
 }
