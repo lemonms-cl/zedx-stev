@@ -15,9 +15,9 @@ const STARTUP_SHOWN_KEY = "zedx_startup_shown";
 const STARTUP_STEPS = [
   { text: "Connecting to Polygon network...", duration: 2000 },
   { text: "Verifying smart contracts...",     duration: 2500 },
-  { text: "Loading market data...",           duration: 2000 },
-  { text: "Syncing price feeds...",           duration: 2000 },
-  { text: "Almost there...",                  duration: 1500 },
+  { text: "Loading market data...",          duration: 2000 },
+  { text: "Syncing price feeds...",          duration: 2000 },
+  { text: "Almost there...",                 duration: 1500 },
 ];
 
 function StartupScreen({ onDone }: { onDone: () => void }) {

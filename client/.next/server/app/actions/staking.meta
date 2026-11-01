@@ -1,0 +1,39 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/actions/layout,_N_T_/actions/staking/layout,_N_T_/actions/staking/page,_N_T_/actions/staking"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/actions/staking/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 96,
+            "slots": {
+              "children": {
+                "hints": 160,
+                "slots": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/3bcfc134e9dcabd4af01b6581fb3b052a14ced0e22baf2fb6d27184fd2105873/$/actions/staking",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/actions/staking/page"
+    },
+    "isFallback": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "app": {
+    "[project]/client/src/app/_not-found/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/api/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/buy/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/limit/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/markets/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/mint/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/sell/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/staking/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/swap/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/trade/[marketId]/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/actions/trade/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ],
+    "[project]/client/src/app/page": [
+      "static/media/07c7676b89ed2778-s.p.2bn3s6zvc0dyp.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

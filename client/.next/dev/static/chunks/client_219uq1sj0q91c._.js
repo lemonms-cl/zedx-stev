@@ -1,5 +1,5 @@
 (globalThis["TURBOPACK_CHUNK_LISTS"] || (globalThis["TURBOPACK_CHUNK_LISTS"] = [])).push({
     script: typeof document === "object" ? document.currentScript : undefined,
-    chunks: ["static/chunks/[root-of-the-server]__1d16xpi01qbe5._.css","static/chunks/_03yitait8x49h._.js","static/chunks/client_src_components_homepage_01tp3y-p2gk9x._.css","static/chunks/client_src_components_homepage_18ufdsswptc76._.js"],
+    chunks: ["static/chunks/[root-of-the-server]__1d16xpi01qbe5._.css","static/chunks/client_src_app_providers_tsx_09jhmbg6eom3u._.js","static/chunks/097k_next_dist_0u_ir047i-r7h._.js","static/chunks/client_src_0tjjs0ck1drps._.js","static/chunks/client_src_components_homepage_01tp3y-p2gk9x._.css","static/chunks/client_src_components_homepage_18ufdsswptc76._.js","static/chunks/097k_viem_217xt9yvay0tn._.js","static/chunks/097k_viem__esm_0r6epw9-awz7z._.js","static/chunks/097k_18wk5mun_7-sw._.js","static/chunks/097k_0m3pd6jk64b7v._.js","static/chunks/097k_ox__esm_06hf_a2w6ihmr._.js","static/chunks/097k_1511twsv6ja-7._.js","static/chunks/client_src_0-k9kh66t9mt_._.js","static/chunks/097k_viem__esm_utils_ccip_1yzud2vh6v95k.js","static/chunks/097k_0sexxpyjkhokr._.js","static/chunks/0xx7_@noble_09ahwqt41g4rx._.js"],
     source: "entry"
 });
