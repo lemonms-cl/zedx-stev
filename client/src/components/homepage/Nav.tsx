@@ -8,11 +8,11 @@ export const Nav: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Self-Custodial Swap', href: '/pages/app/' },
-    { name: 'Staking Vaults', href: '/pages/app/' },
-    { name: 'Cross-Chain Bridge', href: '/pages/app/' },
-    { name: 'ZedX L2 Explorer', href: '/pages/app/' },
-    { name: 'Yield & Rates', href: '/pages/app/' },
+    { name: 'Self-Custodial Swap', href: '/app' },
+    { name: 'Staking Vaults', href: '/app' },
+    { name: 'Cross-Chain Bridge', href: '/app' },
+    { name: 'ZedX L2 Explorer', href: '/app' },
+    { name: 'Yield & Rates', href: '/app' },
   ];
 
   return (
@@ -38,7 +38,7 @@ export const Nav: React.FC = () => {
 
         {/* 3. CTA BUTTON (Sign In) */}
         <div className="zedx-nav-cta-container">
-          <Link href="/pages/app/" className="zedx-nav-signin-btn">
+          <Link href="/app" className="zedx-nav-signin-btn">
             Sign In
           </Link>
         </div>
@@ -68,7 +68,7 @@ export const Nav: React.FC = () => {
             </Link>
           ))}
           <Link 
-            href="/pages/app/" 
+            href="/app" 
             className="zedx-mobile-signin-btn"
             onClick={() => setMobileMenuOpen(false)}
           >

@@ -2,6 +2,8 @@
 
 git add -A && git commit -m "Update all code" && git push
 
+rm -rf client/.next client/.vercel
+
 //install vercel
 
 npm install -g vercel
@@ -16,4 +18,5 @@ npx hardhat test --config hardhat.config.cjs
 marketEngine
 server
 
-//
+// how to build server app
+rm -rf node_modules package-lock.json client/node_modules client/package-lock.json client/.next .next .vercel client/.vercel

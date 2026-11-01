@@ -6,8 +6,9 @@
   "engines": {
     "node": ">=18"
   },
-  "scripts": {
-    "vercel-build": "next build",
+"scripts": {
+    "build": "cd client && next build",
+    "vercel-build": "cd client && next build",
     "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "predev": "node --input-type=commonjs -e \"require('fs').rmSync('client/.next',{recursive:true,force:true})\"",

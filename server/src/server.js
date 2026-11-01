@@ -375,4 +375,9 @@ export function stopServer() {
   });
 }
 
+// Automatically start ONLY if explicitly triggered via START_SERVER flag (from npm run server)
+if (process.env.START_SERVER === 'true') {
+  startServer();
+}
+
 export default app;
