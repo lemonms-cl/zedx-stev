@@ -6,16 +6,10 @@
   "engines": {
     "node": ">=18"
   },
-  "scripts": {
-    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
-    "start": "concurrently \"npm run server\" \"npm run client:start\"",
-    "build": "cd client && next build",
-    "predev": "node --input-type=commonjs -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
-    "prestart": "node --input-type=commonjs -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
-    "server": "START_SERVER=true node server/src/server.js",
-    "server:dev": "START_SERVER=true node --watch --watch-path=server/src server/src/server.js",
-    "client": "cd client && next dev --port 3000",
-    "client:start": "next start",
+"scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
     "compile": "npx hardhat compile --config contracts/hardhat.config.cjs",
     "test:contracts": "npx hardhat test --config contracts/hardhat.config.cjs",
     "deploy:polygon": "npx hardhat run contracts/scripts/deploy.cjs --network polygon --config contracts/hardhat.config.cjs",
@@ -26,17 +20,13 @@
     "@openzeppelin/contracts": "^5.0.2",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.0",
     "lucide-react": "^1.66.0",
-    "next": "^16.2.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "next": "^15.5.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "tailwind-merge": "^3.7.0",
-    "tailwindcss-visual-kit": "^0.0.1-security",
-    "viem": "^2.48.8",
-    "ws": "^8.18.0"
+    "viem": "^2.48.8"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.5",
@@ -45,14 +35,13 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.21",
-    "concurrently": "^9.2.1",
     "ethers": "^6.13.5",
     "hardhat": "^2.22.17",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.6.3"
   },
-  "description": "ZedX is a non-custodial DeFi app on Polygon. Users connect a wallet and can mint ZEDX with POL, stake it for yield, swap tokens, and trade perpetual markets with leverage. Funds stay in the user's wallet.",
+  "description": "ZedX is a non-custodial DeFi app on Polygon. Users connect a wallet and can mint ZEDX with POL, stake it for yield, swap tokens, and trade perpetual markets with leverage.",
   "main": "index.js",
   "repository": {
     "type": "git",

@@ -4,19 +4,33 @@ git add -A && git commit -m "Update all code" && git push
 
 rm -rf client/.next client/.vercel
 
-//install vercel
+//****chosen hoted = vercel******
 
 npm install -g vercel
 
-//contracts tests
+//***contracts tests***
 
 cd contracts
 npx hardhat test
 npx hardhat test --config hardhat.config.cjs
 
-// server (what file start on deploy and might cause crash app)
+// server hard file that call server automaticaly (what file start on deploy and might cause crash app)
 marketEngine
 server
 
-// how to build server app
+// *****how to build this server app******
+
+1/ start frech or refrech then all below
 rm -rf node_modules package-lock.json client/node_modules client/package-lock.json client/.next .next .vercel client/.vercel
+
+2/ clear cash
+npm cache clean --force
+
+3/ Install npm in root and in fronted
+npm install
+npm install --prefix client
+
+(client is the frontend)
+
+Important: if a errors that semms not be solved and persist illogicaly  at many fixation is sure that the version you instal lateast one is unacurate back to old
+4/ start with first preview app 
