@@ -1,4 +1,4 @@
-{"timestamp":"00:00:03.747","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:10.715","source":"Server","level":"LOG","message":"○ Compiling / ..."}
-{"timestamp":"00:00:27.289","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:00:39.457","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:04.674","source":"Server","level":"WARN","message":"⚠ Slow filesystem detected. The benchmark took 1403ms. If /workspaces/zedx-stev/client/.next/dev is a network drive, consider moving it to a local folder.\nSee more: https://nextjs.org/docs/app/guides/local-development"}
+{"timestamp":"00:00:05.527","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:22.945","source":"Server","level":"LOG","message":"○ Compiling / ..."}
+{"timestamp":"00:00:50.697","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}

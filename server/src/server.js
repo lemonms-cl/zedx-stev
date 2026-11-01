@@ -6,6 +6,8 @@ import { mkdirSync } from "node:fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 loadEnv({ path: join(__dirname, "../../.env") });
+loadEnv({ path: join(__dirname, "../../.env.local") });
+
 import http from "node:http";
 import express from "express";
 import cors from "cors";
@@ -29,7 +31,6 @@ function envU64(key, fallback) {
   return Number.isFinite(n) ? n : fallback;
 }
 
-
 function quoteDecimalsForQuote(quote) {
   switch (quote) {
     case "ETH":
@@ -41,10 +42,6 @@ function quoteDecimalsForQuote(quote) {
   }
 }
 
-/**
- * @param {import('./matchingEngine.js').OrderRec} o
- * @param {number} decimals
- */
 function orderToJson(o, decimals) {
   return {
     id: o.id,
@@ -59,10 +56,6 @@ function orderToJson(o, decimals) {
   };
 }
 
-/**
- * @param {import('./matchingEngine.js').StoredTrade} t
- * @param {number} decimals
- */
 function tradeToJson(t, decimals) {
   return {
     id: t.id,
@@ -97,7 +90,6 @@ const wethAddress = envStr("WETH_ADDRESS", "0x0d500B1d8E8eF31E21C99d1Db9A6444d3A
 const swapDeadlineSecs = envU64("SWAP_DEADLINE_SECS", 600);
 const matchingPath = envStr("MATCHING_DATA_PATH", join(__dirname, "../data/matching_state.json"));
 
-// Ensure data directory exists so matching engine can persist state
 const dataDir = join(__dirname, "../data");
 mkdirSync(dataDir, { recursive: true });
 
@@ -124,7 +116,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Proxy Binance klines API to avoid browser CORS restrictions
 app.get("/binance/api/v3/klines", async (req, res) => {
   try {
     const qs = new URLSearchParams(req.query).toString();
@@ -168,18 +159,10 @@ app.get("/api/v1/swap/quote", async (req, res) => {
     amount_in: String(req.query.amount_in ?? ""),
     from: String(req.query.from ?? ""),
     to: String(req.query.to ?? ""),
-    path:
-      typeof req.query.path === "string" ? req.query.path : undefined,
-    recipient:
-      typeof req.query.recipient === "string" ? req.query.recipient : undefined,
-    slippage_bps:
-      req.query.slippage_bps != null
-        ? Number.parseInt(String(req.query.slippage_bps), 10)
-        : undefined,
-    deadline:
-      req.query.deadline != null
-        ? Number.parseInt(String(req.query.deadline), 10)
-        : undefined,
+    path: typeof req.query.path === "string" ? req.query.path : undefined,
+    recipient: typeof req.query.recipient === "string" ? req.query.recipient : undefined,
+    slippage_bps: req.query.slippage_bps != null ? Number.parseInt(String(req.query.slippage_bps), 10) : undefined,
+    deadline: req.query.deadline != null ? Number.parseInt(String(req.query.deadline), 10) : undefined,
   };
   const r = await getSwapQuote(state, q);
   if (r.text != null) {
@@ -209,10 +192,8 @@ app.get("/api/v1/markets/:id", async (req, res) => {
 });
 
 app.get("/api/v1/orders", async (req, res) => {
-  const marketId =
-    typeof req.query.market_id === "string" ? req.query.market_id : undefined;
-  const openOnly =
-    req.query.open_only === "true" || req.query.open_only === "1";
+  const marketId = typeof req.query.market_id === "string" ? req.query.market_id : undefined;
+  const openOnly = req.query.open_only === "true" || req.query.open_only === "1";
   const list = await matching.listOrders(marketId, openOnly);
   let decimals = 8;
   if (marketId) {
@@ -232,13 +213,9 @@ app.post("/api/v1/orders", async (req, res) => {
     return res.status(400).type("text/plain").send("side must be buy or sell");
   }
   const otRaw = String(body.order_type ?? "").toLowerCase();
-  const orderType =
-    otRaw === "limit" ? "limit" : otRaw === "market" ? "market" : null;
+  const orderType = otRaw === "limit" ? "limit" : otRaw === "market" ? "market" : null;
   if (!orderType) {
-    return res
-      .status(400)
-      .type("text/plain")
-      .send("order_type must be limit or market");
+    return res.status(400).type("text/plain").send("order_type must be limit or market");
   }
 
   let size;
@@ -265,30 +242,18 @@ app.post("/api/v1/orders", async (req, res) => {
     return res.status(404).type("text/plain").send("unknown market_id");
   }
   const decimals = quoteDecimalsForQuote(d.quote);
-
   const now = Math.floor(Date.now() / 1000);
 
   try {
-    const { order, trades } = await matching.submit(
-      mid,
-      side,
-      orderType,
-      price,
-      size,
-      now
-    );
+    const { order, trades } = await matching.submit(mid, side, orderType, price, size, now);
     res.json({
       order: orderToJson(order, decimals),
       trades: trades.map((t) => tradeToJson(t, decimals)),
     });
   } catch (e) {
     if (e instanceof MatchError) {
-      if (e.code === "BAD_REQUEST") {
-        return res.status(400).type("text/plain").send(e.message);
-      }
-      if (e.code === "NOT_FOUND") {
-        return res.status(404).type("text/plain").send("not found");
-      }
+      if (e.code === "BAD_REQUEST") return res.status(400).type("text/plain").send(e.message);
+      if (e.code === "NOT_FOUND") return res.status(404).type("text/plain").send("not found");
     }
     throw e;
   }
@@ -305,18 +270,13 @@ app.delete("/api/v1/orders/:id", async (req, res) => {
     return res.status(204).end();
   } catch (e) {
     if (e instanceof MatchError) {
-      if (e.code === "BAD_REQUEST") {
-        return res.status(400).type("text/plain").send(e.message);
-      }
-      if (e.code === "NOT_FOUND") {
-        return res.status(404).type("text/plain").send("not found");
-      }
+      if (e.code === "BAD_REQUEST") return res.status(400).type("text/plain").send(e.message);
+      if (e.code === "NOT_FOUND") return res.status(404).type("text/plain").send("not found");
     }
     throw e;
   }
 });
 
-// Staking info — reads from chain via ethCall
 app.get("/api/v1/staking/info", async (_req, res) => {
   const stakingAddr = state.zedx_staking_address;
   if (!stakingAddr || stakingAddr === "0x0000000000000000000000000000000000000000") {
@@ -380,6 +340,39 @@ server.on("upgrade", (req, socket, head) => {
 const host = envStr("BIND_HOST", "0.0.0.0");
 const port = envU64("PORT", 5000);
 
-server.listen(port, host, () => {
-  console.error(`listening on http://${host}:${port}`);
-});
+let isServerRunning = false;
+let marketEngineStarted = false;
+
+/**
+ * Call this function manually (e.g. from a UI button click or custom startup script) 
+ * to boot up the HTTP server and market engine.
+ */
+export function startServer() {
+  if (isServerRunning) {
+    console.log("⚠️ Server is already running.");
+    return server;
+  }
+
+  if (!marketEngineStarted) {
+    markets.start();
+    marketEngineStarted = true;
+  }
+
+  return new Promise((resolve) => {
+    server.listen(port, host, () => {
+      isServerRunning = true;
+      console.log(`🚀 Server and market engine started on http://${host}:${port}`);
+      resolve(server);
+    });
+  });
+}
+
+export function stopServer() {
+  if (!isServerRunning) return;
+  server.close(() => {
+    isServerRunning = false;
+    console.log("🛑 Server stopped.");
+  });
+}
+
+export default app;

@@ -107,10 +107,41 @@ export class MarketEngine extends EventEmitter {
     /** @type {Map<string, import('./marketEngine.js').InnerMarket>} */
     this.inner = new Map();
     this._initMarkets();
+    this._isRunning = false;
+    this._binanceWs = null;
+    this._broadcastTimer = null;
+  }
+
+  /**
+   * Explicitly start background processes and connections only when needed.
+   */
+  start() {
+    if (this._isRunning) return;
+    this._isRunning = true;
+
     this._connectBinance();
-    // Broadcast to WS clients every 2s
     this._broadcastTimer = setInterval(() => this._broadcast(), BROADCAST_INTERVAL_MS);
     this._broadcastTimer.unref?.();
+    console.log("[marketEngine] Engine started successfully.");
+  }
+
+  /**
+   * Stop background processes and connections if required.
+   */
+  stop() {
+    if (!this._isRunning) return;
+    this._isRunning = false;
+
+    if (this._broadcastTimer) {
+      clearInterval(this._broadcastTimer);
+      this._broadcastTimer = null;
+    }
+
+    if (this._binanceWs) {
+      this._binanceWs.terminate();
+      this._binanceWs = null;
+    }
+    console.log("[marketEngine] Engine stopped.");
   }
 
   _initMarkets() {
@@ -148,7 +179,6 @@ export class MarketEngine extends EventEmitter {
         candles,
         candle_open: p,
         last_candle_bucket: bucket,
-        // real-data fields (populated by Binance stream)
         change_24h_pct_real: null,
         volume_24h_real: null,
       });
@@ -159,11 +189,11 @@ export class MarketEngine extends EventEmitter {
 
   _connectBinance() {
     const symbols = Object.values(BINANCE_MAP);
-    // Combined stream: miniTicker for price/volume/change
     const streams = symbols.map((s) => `${s}@miniTicker`).join("/");
     const url = `wss://stream.binance.com:9443/stream?streams=${streams}`;
 
     const connect = () => {
+      if (!this._isRunning) return;
       const ws = new WebSocket(url);
       this._binanceWs = ws;
 
@@ -174,7 +204,6 @@ export class MarketEngine extends EventEmitter {
       ws.on("message", (raw) => {
         try {
           const msg = JSON.parse(raw.toString());
-          // Combined stream wraps in { stream, data }
           const ticker = msg.data ?? msg;
           this._applyTicker(ticker);
         } catch {
@@ -184,7 +213,9 @@ export class MarketEngine extends EventEmitter {
 
       ws.on("close", () => {
         console.error("[marketEngine] Binance stream closed, reconnecting…");
-        setTimeout(connect, RECONNECT_DELAY_MS);
+        if (this._isRunning) {
+          setTimeout(connect, RECONNECT_DELAY_MS);
+        }
       });
 
       ws.on("error", (err) => {
@@ -196,15 +227,10 @@ export class MarketEngine extends EventEmitter {
     connect();
   }
 
-  /**
-   * Apply a Binance miniTicker event to the matching market.
-   * miniTicker fields: s=symbol, c=close, o=open, h=high, l=low, v=baseVol, q=quoteVol
-   */
   _applyTicker(ticker) {
     if (!ticker || !ticker.s) return;
     const sym = ticker.s.toLowerCase();
 
-    // Find which market id maps to this symbol
     const marketId = Object.entries(BINANCE_MAP).find(([, v]) => v === sym)?.[0];
     if (!marketId) return;
 
@@ -213,7 +239,7 @@ export class MarketEngine extends EventEmitter {
 
     const price  = parseFloat(ticker.c);
     const open   = parseFloat(ticker.o);
-    const vol    = parseFloat(ticker.q); // quote volume (USD-denominated)
+    const vol    = parseFloat(ticker.q);
 
     if (!Number.isFinite(price) || price <= 0) return;
 
@@ -222,14 +248,11 @@ export class MarketEngine extends EventEmitter {
     m.open_24h = Number.isFinite(open) && open > 0 ? open : m.open_24h;
     if (Number.isFinite(vol) && vol > 0) m.volume_24h = vol;
 
-    // Update sparkline
     if (m.sparkline.length >= 60) m.sparkline.shift();
     m.sparkline.push(price);
 
-    // Update candles
     this._updateCandle(m, price, Math.abs(price - prevPrice) * 100);
 
-    // Simulated trade print on price change
     if (price !== prevPrice) {
       const side = price > prevPrice ? "buy" : "sell";
       const qd = quoteDp(m.quote);
@@ -262,14 +285,11 @@ export class MarketEngine extends EventEmitter {
     }
   }
 
-  // ─── Simulated tick (zedx-eth only) ──────────────────────────────────────
-
   _tickSimulated() {
     for (const m of this.inner.values()) {
-      if (BINANCE_MAP[m.id]) continue; // skip real markets
+      if (BINANCE_MAP[m.id]) continue;
 
       const jitter = rnd(-0.0008, 0.0008);
-      const prev = m.price;
       m.price *= 1 + jitter;
       m.volume_24h *= 1 + rnd(-0.0002, 0.0003);
       m.funding_1h_pct += rnd(-0.0001, 0.0001);
@@ -295,14 +315,10 @@ export class MarketEngine extends EventEmitter {
     }
   }
 
-  // ─── Broadcast ───────────────────────────────────────────────────────────
-
   _broadcast() {
     const json = JSON.stringify({ type: "tick", overview: this.overview() });
     this.emit("broadcast", json);
   }
-
-  // ─── Public API ──────────────────────────────────────────────────────────
 
   static toPublic(m) {
     const change = m.open_24h > 0 ? ((m.price - m.open_24h) / m.open_24h) * 100 : 0;

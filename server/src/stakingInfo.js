@@ -1,4 +1,3 @@
-// Staking contract read helpers using ethers ABI encoding
 import { Interface } from "ethers";
 import { ethCall } from "./ethCall.js";
 

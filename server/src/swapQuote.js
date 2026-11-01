@@ -33,10 +33,6 @@ function routerConfigured(addr) {
   return t !== "" && t !== "0x0000000000000000000000000000000000000000";
 }
 
-/**
- * @param {string} s
- * @param {string} zedxToken
- */
 function parseSwapSide(s, zedxToken) {
   const t = s.trim();
   if (isNativeLabel(t)) return { kind: "native" };
@@ -258,24 +254,6 @@ function nowUnix() {
   return Math.floor(Date.now() / 1000);
 }
 
-/**
- * @param {{
- *   swap_router_address: string;
- *   weth_address: string;
- *   rpc_url: string;
- *   zedx_token_address: string;
- *   swap_deadline_secs: number;
- * }} state
- * @param {{
- *   amount_in: string;
- *   from: string;
- *   to: string;
- *   path?: string;
- *   recipient?: string;
- *   slippage_bps?: number;
- *   deadline?: number;
- * }} q
- */
 export async function getSwapQuote(state, q) {
   if (
     !routerConfigured(state.swap_router_address) ||
@@ -328,7 +306,6 @@ export async function getSwapQuote(state, q) {
   const tokenOut = to.kind === "token" ? to.addr : "";
 
   let pathAddrs;
-  /** @type {string | null | undefined} */
   let pathNote;
 
   if (q.path?.trim()) {

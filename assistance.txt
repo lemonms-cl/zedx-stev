@@ -1,10 +1,19 @@
--------------install vercel
+//comit change
+
+git add -A && git commit -m "Update all code" && git push
+
+//install vercel
 
 npm install -g vercel
 
-
------contracts tests
+//contracts tests
 
 cd contracts
 npx hardhat test
 npx hardhat test --config hardhat.config.cjs
+
+// server (what file start on deploy and might cause crash app)
+marketEngine
+server
+
+//

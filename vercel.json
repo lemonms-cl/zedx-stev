@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/src/server.js"
+    },
+    {
+      "source": "/ws/(.*)",
+      "destination": "/server/src/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/client/$1"
+    }
+  ]
+}
